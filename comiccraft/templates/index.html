@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>ComicCraft - Create Your Comic</title>
+
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    body {
+
+        font-family:
+            'Segoe UI',
+            Tahoma,
+            Geneva,
+            Verdana,
+            sans-serif;
+
+        background:
+            url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1920')
+            no-repeat center center fixed;
+
+        background-size: cover;
+
+        margin: 0;
+
+        padding: 40px 0;
+
+    }
+
+
+    .container {
+
+        width: 90%;
+
+        max-width: 800px;
+
+        margin: auto;
+
+    }
+
+
+    .box {
+
+        background: rgba(255, 255, 255, 0.96);
+
+        padding: 30px;
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.2);
+
+        margin-bottom: 25px;
+
+    }
+
+
+    h1,
+    h2 {
+
+        text-align: center;
+
+        color: #1e3a8a;
+
+    }
+
+
+    .form-group {
+
+        margin-bottom: 18px;
+
+    }
+
+
+    label {
+
+        display: block;
+
+        font-weight: bold;
+
+        margin-bottom: 7px;
+
+    }
+
+
+    input,
+    textarea,
+    select {
+
+        width: 100%;
+
+        padding: 11px;
+
+        border:
+            1px solid #ccc;
+
+        border-radius: 7px;
+
+        font-size: 15px;
+
+    }
+
+
+    textarea {
+
+        height: 100px;
+
+        resize: vertical;
+
+    }
+
+
+    .generate-btn {
+
+        width: 100%;
+
+        padding: 14px;
+
+        border: none;
+
+        border-radius: 8px;
+
+        background: #0284c7;
+
+        color: white;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+    }
+
+
+    .generate-btn:hover {
+
+        background: #0369a1;
+
+    }
+
+
+    /* =========================
+       COMIC PANEL
+    ========================= */
+
+    .comic-panel {
+
+        background: white;
+
+        border-radius: 14px;
+
+        padding: 20px;
+
+        margin-top: 30px;
+
+        box-shadow:
+            0 5px 18px rgba(0, 0, 0, 0.15);
+
+    }
+
+
+    .panel-number {
+
+        text-align: center;
+
+        color: #1e3a8a;
+
+        font-size: 22px;
+
+        font-weight: bold;
+
+        margin-bottom: 15px;
+
+    }
+
+
+    .panel-description {
+
+        font-size: 17px;
+
+        line-height: 1.6;
+
+        background: #f8fafc;
+
+        padding: 15px;
+
+        border-radius: 8px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .panel-image {
+
+        width: 100%;
+
+        display: block;
+
+        border-radius: 10px;
+
+    }
+
+
+    /* =========================
+       DOWNLOAD
+    ========================= */
+
+    .download-section {
+
+        text-align: center;
+
+        margin-top: 40px;
+
+    }
+
+
+    .download-btn {
+
+        display: inline-block;
+
+        padding: 15px 30px;
+
+        background: #16a34a;
+
+        color: white;
+
+        text-decoration: none;
+
+        border-radius: 9px;
+
+        font-size: 18px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+    }
+
+
+    .download-btn:hover {
+
+        background: #15803d;
+
+    }
+
+
+    /* =========================
+       EXPORT SUCCESS
+    ========================= */
+
+    .export-success {
+
+        display: none;
+
+        margin-top: 20px;
+
+        padding: 14px;
+
+        background: #dcfce7;
+
+        color: #166534;
+
+        border:
+            1px solid #86efac;
+
+        border-radius: 8px;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        text-align: center;
+
+    }
+
+
+    /* =========================
+       FINAL SUCCESS CARD
+    ========================= */
+
+    .final-success {
+
+        display: none;
+
+        margin-top: 35px;
+
+        padding: 35px 25px;
+
+        background:
+            rgba(255, 255, 255, 0.98);
+
+        border-radius: 18px;
+
+        text-align: center;
+
+        box-shadow:
+            0 8px 30px rgba(0, 0, 0, 0.18);
+
+    }
+
+
+    .success-title {
+
+        font-size: 27px;
+
+        font-weight: bold;
+
+        color: #111827;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .success-text {
+
+        font-size: 17px;
+
+        color: #4b5563;
+
+        line-height: 1.6;
+
+        margin-bottom: 28px;
+
+    }
+
+
+    /* =========================
+       PAINT PALETTE BUTTON
+    ========================= */
+
+    .create-again {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 12px;
+
+        padding: 15px 28px;
+
+        background: #7c3aed;
+
+        color: white;
+
+        text-decoration: none;
+
+        border-radius: 10px;
+
+        font-size: 18px;
+
+        font-weight: bold;
+
+        transition: 0.2s;
+
+        box-shadow:
+            0 5px 15px rgba(124, 58, 237, 0.25);
+
+    }
+
+
+    .create-again:hover {
+
+        background: #6d28d9;
+
+        transform: translateY(-2px);
+
+    }
+
+
+    .paint-palette {
+
+        font-size: 28px;
+
+        line-height: 1;
+
+    }
+
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div
+    class="container"
+    id="comic-container"
+>
+
+```
+<!-- =========================
+     CREATE COMIC
+========================= -->
+
+<div
+    class="box"
+    id="create-section"
+>
+
+    <h1>
+        🎨 ComicCraft
+    </h1>
+
+
+    <h2>
+        Create Your Comic
+    </h2>
+
+
+    <form
+        action="/generate"
+        method="post"
+    >
+
+
+        <div class="form-group">
+
+            <label for="prompt">
+                Story Prompt:
+            </label>
+
+            <textarea
+                id="prompt"
+                name="prompt"
+                required
+                placeholder="A brave boy explores a magical forest."
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="character_name">
+                Main Character Name:
+            </label>
+
+            <input
+                type="text"
+                id="character_name"
+                name="character_name"
+                value="Arjun"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="setting">
+                Setting:
+            </label>
+
+            <select
+                id="setting"
+                name="setting"
+            >
+
+                <option value="Forest">
+                    Forest
+                </option>
+
+                <option value="School">
+                    School
+                </option>
+
+                <option value="Space">
+                    Space
+                </option>
+
+                <option value="City">
+                    City
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="tone">
+                Story Tone:
+            </label>
+
+            <select
+                id="tone"
+                name="tone"
+            >
+
+                <option value="Dramatic">
+                    Dramatic
+                </option>
+
+                <option value="Light-hearted">
+                    Light-hearted
+                </option>
+
+                <option value="Poetic">
+                    Poetic
+                </option>
+
+                <option value="Funny">
+                    Funny
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="style">
+                Art Style:
+            </label>
+
+            <select
+                id="style"
+                name="style"
+            >
+
+                <option value="Comic Book">
+                    Comic Book
+                </option>
+
+                <option value="Realistic">
+                    Realistic
+                </option>
+
+                <option value="Anime">
+                    Anime
+                </option>
+
+                <option value="Pixel Art">
+                    Pixel Art
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="generate-btn"
+        >
+
+            🚀 Generate Comic
+
+        </button>
+
+
+    </form>
+
+</div>
+
+
+{% if result %}
+
+
+<!-- =========================
+     COMIC TITLE
+========================= -->
+
+<div class="box">
+
+    <h2>
+        📖 {{ title }}
+    </h2>
+
+</div>
+
+
+<!-- =========================
+     COMIC PANELS
+========================= -->
+
+<div class="box">
+
+    <h2>
+        🖼️ Your Comic
+    </h2>
+
+
+    {% for panel in panels %}
+
+
+    <div class="comic-panel">
+
+
+        <div class="panel-number">
+
+            Panel {{ panel.number }}
+
+        </div>
+
+
+        <div class="panel-description">
+
+            {{ panel.text }}
+
+        </div>
+
+
+        <img
+            class="panel-image"
+            src="{{ panel.image }}"
+            alt="Comic Panel {{ panel.number }}"
+        >
+
+
+    </div>
+
+
+    {% endfor %}
+
+
+    <!-- =========================
+         DOWNLOAD
+    ========================= -->
+
+    {% if panels %}
+
+
+    <div class="download-section">
+
+
+        <a
+            href="{{ download_url }}"
+            class="download-btn"
+            onclick="showExportSuccess()"
+        >
+
+            📥 Download Comic PDF
+
+        </a>
+
+
+        <!-- FIRST SUCCESS MESSAGE -->
+
+        <div
+            id="export-success"
+            class="export-success"
+        >
+
+            ✅ Comic exported successfully!
+
+        </div>
+
+
+        <!-- =========================
+             FINAL SUCCESS MESSAGE
+        ========================= -->
+
+        <div
+            id="final-success"
+            class="final-success"
+        >
+
+
+            <div class="success-title">
+
+                Your AI-powered comic has been successfully created
+
+            </div>
+
+
+            <div class="success-text">
+
+                Dive back in and bring another story to life.
+
+            </div>
+
+
+            <!-- PAINT PALETTE + BUTTON -->
+
+            <a
+                href="/"
+                class="create-again"
+            >
+
+                <span class="paint-palette">
+                    🎨
+                </span>
+
+                <span>
+                    Go Create Another Comic
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+{% endif %}
+```
+
+</div>
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+
+function showExportSuccess() {
+
+
+    /*
+     * Show the first success message
+     */
+
+    setTimeout(function () {
+
+
+        const successMessage =
+            document.getElementById(
+                "export-success"
+            );
+
+
+        if (successMessage) {
+
+            successMessage.style.display =
+                "block";
+
+        }
+
+
+    }, 500);
+
+
+    /*
+     * Show final success card
+     */
+
+    setTimeout(function () {
+
+
+        const finalMessage =
+            document.getElementById(
+                "final-success"
+            );
+
+
+        if (finalMessage) {
+
+            finalMessage.style.display =
+                "block";
+
+
+            /*
+             * Smooth scroll
+             */
+
+            finalMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+    }, 1000);
+
+
+}
+
+
+</script>
+
+</body>
+
+</html>

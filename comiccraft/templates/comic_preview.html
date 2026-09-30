@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComicCraft - Preview</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #1f2937;
+        }
+        .panel-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .panel-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 15px;
+        }
+        .panel-img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 15px;
+        }
+        .scene-desc {
+            font-style: italic;
+            color: #4b5563;
+            margin-bottom: 10px;
+        }
+        .story-text {
+            white-space: pre-line;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        .download-btn {
+            display: block;
+            width: 260px;
+            margin: 30px auto;
+            text-align: center;
+            background-color: #0284c7;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .download-btn:hover {
+            background-color: #0369a1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📖 Your Comic Preview</h1>
+
+        {% for panel in layout %}
+        <div class="panel-card">
+            <div class="panel-title">Panel {{ panel.panel }}: {{ panel.title }}</div>
+            <img class="panel-img" src="/{{ panel.image_path }}" alt="Panel Image">
+            <div class="scene-desc">{{ panel.scene_description }}</div>
+            <div class="story-text">{{ panel.text }}</div>
+        </div>
+        {% endfor %}
+
+        <a href="/export-success?pdf_path={{ pdf_path }}" class="download-btn">📥 Download Your Comic as PDF</a>
+    </div>
+</body>
+</html>

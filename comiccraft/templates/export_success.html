@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Exported</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #16a34a;
+            font-size: 28px;
+        }
+        p {
+            color: #374151;
+            margin-bottom: 25px;
+        }
+        .btn {
+            background-color: #0284c7;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+        .btn:hover {
+            background-color: #0369a1;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>✅ Comic Exported Successfully!</h2>
+        <p>Your AI-powered comic has been successfully created! Dive back in and bring another story to life.</p>
+        <a href="{{ pdf_path }}" download class="btn" style="margin-right: 10px;">💾 Download File</a>
+        <a href="/" class="btn">🎨 Go Create Another Comic</a>
+    </div>
+</body>
+</html>
